@@ -1,4 +1,5 @@
-# TensorFlow Lite Object Detection Android Demo
+# TensorFlow Lite Object Detection Android demo
+## Modified by team CuongHungPhat
 
 ### Overview
 
