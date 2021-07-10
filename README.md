@@ -2,10 +2,10 @@
 ## Modified by team CuongHungPhat
 
 TODO LIST
-[] OAuth2
-[] Up ảnh Google Drive
-[] Nhận diện từ ảnh chụp
-[] Chỉnh sửa ảnh
+- [ ] OAuth2
+- [ ] Up ảnh Google Drive
+- [ ] Nhận diện từ ảnh chụp
+- [ ] Chỉnh sửa ảnh
 
 The core of this app is a tensorflow lite object detection on android,
 we try to implement more features to make it even more interesting!
