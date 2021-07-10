@@ -1,6 +1,9 @@
 # TensorFlow Lite Object Detection Android demo
 ## Modified by team CuongHungPhat
 
+The core of this app is a tensorflow lite object detection on android,
+we try to implement more features to make it even more interesting!
+
 ### Overview
 
 This is a camera app that continuously detects the objects (bounding boxes and
