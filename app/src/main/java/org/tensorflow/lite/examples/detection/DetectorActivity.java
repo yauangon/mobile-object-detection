@@ -165,14 +165,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                   case MotionEvent.ACTION_POINTER_UP:
                     float x = event.getX();
                     float y = event.getY();
-                    String touched = tracker.checkTouched(y, x);
-                    Log.d("Object touch", touched);
-                    if (touched != "NULL")
-                    {
-                      Log.d("toast: ", "Checked");
-                      Toast toast = Toast.makeText(getApplicationContext(), touched, Toast.LENGTH_SHORT);
-//                    toast.show();
-                    }
+//                    String touched = tracker.checkTouched(x, y);
+                    RectF cropBox = tracker.checkTouched(x, y);
                     return true;
                 }
                 return false;
