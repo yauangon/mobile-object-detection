@@ -18,11 +18,14 @@ package org.tensorflow.lite.examples.detection;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.media.ImageReader.OnImageAvailableListener;
@@ -179,6 +182,20 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
 
     tracker.setFrameConfiguration(previewWidth, previewHeight, sensorOrientation);
+  }
+
+  Bitmap cropBitmap(Bitmap bmp, RectF location)
+  {
+    Bitmap bmOverlay = Bitmap.createBitmap(320, 480, Bitmap.Config.ARGB_8888);
+
+    Paint paint = new Paint();
+    paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+
+    Canvas canvas = new Canvas(bmOverlay);
+    canvas.drawBitmap(bmp, 0, 0, null);
+    canvas.drawRect(30, 30, 100, 100, paint);
+
+    return bmOverlay;
   }
 
   @Override
