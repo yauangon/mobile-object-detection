@@ -30,6 +30,7 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.media.ImageReader.OnImageAvailableListener;
 import android.os.SystemClock;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
@@ -167,6 +168,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                     float y = event.getY();
 //                    String touched = tracker.checkTouched(x, y);
                     RectF cropBox = tracker.checkTouched(x, y);
+                    Bitmap result = cropBitmap(croppedBitmap, cropBox);
+                    MediaStore.Images.Media.insertImage(getContentResolver(),
+                            result, "Test version", "");
                     return true;
                 }
                 return false;
@@ -180,10 +184,12 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
   Bitmap cropBitmap(Bitmap bmp, RectF location)
   {
-    Bitmap bmOverlay = Bitmap.createBitmap(320, 480, Bitmap.Config.ARGB_8888);
+
+    Bitmap bmOverlay = Bitmap.createBitmap((int) location.width(), (int) location.height(),
+            Bitmap.Config.ARGB_8888);
 
     Paint paint = new Paint();
-    paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+    paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.));
 
     Canvas canvas = new Canvas(bmOverlay);
     canvas.drawBitmap(bmp, 0, 0, null);
