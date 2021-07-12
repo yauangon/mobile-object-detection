@@ -189,7 +189,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             Bitmap.Config.ARGB_8888);
 
     Paint paint = new Paint();
-    paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.));
+    paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
 
     Canvas canvas = new Canvas(bmOverlay);
     canvas.drawBitmap(bmp, 0, 0, null);
