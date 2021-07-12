@@ -25,6 +25,7 @@ import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Pair;
 import android.util.TypedValue;
 import java.util.LinkedList;
@@ -154,16 +155,39 @@ public class MultiBoxTracker {
     }
   }
 
-  public String checkTouched(float x, float y)
+  public String checkTouchedGetLabel(float x, float y)
   {
-    for(int i = 0; i < trackedObjects.size(); i++)
+    final Matrix rgbFrameToScreen = new Matrix(getFrameToCanvasMatrix());
+    for(int i = 0; i < screenRects.size(); i++)
     {
       TrackedRecognition tmp = trackedObjects.get(i);
-      if (tmp.location.contains(x, y))
+      final RectF detectionFrameRect = new RectF(tmp.location);
+
+      final RectF detectionScreenRect = new RectF();
+      rgbFrameToScreen.mapRect(detectionScreenRect, detectionFrameRect);
+      if (detectionScreenRect.contains(x, y))
         return tmp.title;
     }
     return "NULL";
   }
+
+  public RectF checkTouched(float x, float y)
+  {
+    final Matrix rgbFrameToScreen = new Matrix(getFrameToCanvasMatrix());
+    for(int i = 0; i < screenRects.size(); i++)
+    {
+      TrackedRecognition tmp = trackedObjects.get(i);
+      final RectF detectionFrameRect = new RectF(tmp.location);
+
+      final RectF detectionScreenRect = new RectF();
+      rgbFrameToScreen.mapRect(detectionScreenRect, detectionFrameRect);
+      if (detectionScreenRect.contains(x, y))
+        return detectionScreenRect;
+    }
+    return null;
+  }
+
+
 
   public int getSize()
   {
@@ -185,8 +209,9 @@ public class MultiBoxTracker {
       final RectF detectionScreenRect = new RectF();
       rgbFrameToScreen.mapRect(detectionScreenRect, detectionFrameRect);
 
-      logger.v(
-          "Result! Frame: " + result.getLocation() + " mapped to screen:" + detectionScreenRect);
+//      logger.v(
+//          "Result! Frame: " + result.getLocation() + " mapped to screen:" + detectionScreenRect);
+      Log.d("Result", "Result! Frame: " + result.getLocation() + " mapped to screen:" + detectionScreenRect);
 
       screenRects.add(new Pair<Float, RectF>(result.getConfidence(), detectionScreenRect));
 
