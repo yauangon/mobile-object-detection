@@ -164,6 +164,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                     float y = event.getY();
 //                    String touched = tracker.checkTouched(x, y);
                     RectF cropBox = tracker.checkTouched(x, y);
+
                     return true;
                 }
                 return false;
