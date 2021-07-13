@@ -18,15 +18,19 @@ package org.tensorflow.lite.examples.detection;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.media.ImageReader.OnImageAvailableListener;
 import android.os.SystemClock;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
@@ -164,7 +168,11 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                     float y = event.getY();
 //                    String touched = tracker.checkTouched(x, y);
                     RectF cropBox = tracker.checkTouched(x, y);
-
+                    if(cropBox == null) return false;
+                    Bitmap result = cropBitmap(rgbFrameBitmap, cropBox);
+                    if(result != null)
+                      MediaStore.Images.Media.insertImage(getContentResolver(),
+                            result, "Test version", "");
                     return true;
                 }
                 return false;
@@ -175,6 +183,28 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     tracker.setFrameConfiguration(previewWidth, previewHeight, sensorOrientation);
   }
+
+  Bitmap cropBitmap(Bitmap bmp, RectF location) {
+    try {
+      float sx = (float) 900 / (float) 480;
+      float sy = (float) 1600 / (float) 640;
+      int x, y, width, height;
+      y = (int) (480 - location.right/sx - 10);
+      x = (int) (location.top/sy - 10);
+      if(x < 0) x = 0;
+      if(y < 0) y = 0;
+      width = (int) ((location.height()/sx) + 50)%480;
+      height = (int) ((location.width()/sy) + 50)%640;
+      Bitmap bmp2 = Bitmap.createBitmap(bmp, x, y, width, height);
+      Log.d("Render", "Successfully extract label");
+      return bmp2;
+    } catch (Exception e) {
+      Log.d("Render", location.width() + " " + location.height());
+      Log.d("Render", "Cannot extract label");
+    }
+    return null;
+  }
+
 
   @Override
   protected void processImage() {
