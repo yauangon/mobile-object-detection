@@ -1,5 +1,6 @@
 package org.tensorflow.lite.examples.detection;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -15,6 +16,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.Scope;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
+import com.google.api.client.json.gson.GsonFactory;
+import com.google.api.services.drive.Drive;
+import com.google.api.services.drive.DriveScopes;
 
 import net.openid.appauth.AuthorizationException;
 import net.openid.appauth.AuthorizationRequest;
@@ -32,6 +46,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collection;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
     private static final int RC_AUTH = 100;
@@ -47,12 +63,21 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Authorize();
+                requestSignIn();
             }
         });
-        new VerifyTokenAsyncTask(this).execute("");
+//        new VerifyTokenAsyncTask(this).execute("");
     }
 
+    private void requestSignIn() {
+        GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestScopes(new Scope(DriveScopes.DRIVE_FILE))
+                .build();
+        GoogleSignInClient client = GoogleSignIn.getClient(this, signInOptions);
+        startActivityForResult(client.getSignInIntent(), 400);
+
+    }
     public void Authorize() {
 
         AuthorizationServiceConfiguration serviceConfig =
@@ -82,37 +107,70 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RC_AUTH) {
-            AuthorizationResponse resp = AuthorizationResponse.fromIntent(data);
-            AuthorizationException ex = AuthorizationException.fromIntent(data);
-            if (resp == null) {
-                Log.d("Debug", "Null Response");
-                return;
-            } else {
-                Log.d("Debug", "Ok");
-            }
-            mAuthService.performTokenRequest(
-                    resp.createTokenExchangeRequest(),
-                    (resp1, ex1) -> {
-                        if (resp1 != null) {
-                            SharedPreferences sharedPreferences = getSharedPreferences("OAUTH", MODE_PRIVATE);
-                            sharedPreferences.edit().putString("ACCESS_TOKEN", resp1.accessToken).apply();
-                            sharedPreferences.edit().putString("REFRESH_TOKEN", resp1.refreshToken).apply();
-                            /**
-                             * How to retrive token:
-                             *     SharedPreferences sharedPreferences = getSharedPreferences("OAUTH", MODE_PRIVATE);
-                             *     String token = sharedPreferences.getString("ACCESS_TOKEN", "");
-                             */
-                            Intent intent = new Intent(MainActivity.this, DetectorActivity.class);
-                            startActivity(intent);
-                        } else {
-                            // authorization failed, check ex for more details
-                        }
-                    });
-        } else {
-
+        switch (requestCode) {
+            case RC_AUTH:
+                AuthorizationResponse resp = AuthorizationResponse.fromIntent(data);
+                AuthorizationException ex = AuthorizationException.fromIntent(data);
+                if (resp == null) {
+                    Log.d("Debug", "Null Response");
+                    return;
+                } else {
+                    Log.d("Debug", "Ok");
+                }
+                mAuthService.performTokenRequest(
+                        resp.createTokenExchangeRequest(),
+                        (resp1, ex1) -> {
+                            if (resp1 != null) {
+                                SharedPreferences sharedPreferences = getSharedPreferences("OAUTH", MODE_PRIVATE);
+                                sharedPreferences.edit().putString("ACCESS_TOKEN", resp1.accessToken).apply();
+                                sharedPreferences.edit().putString("REFRESH_TOKEN", resp1.refreshToken).apply();
+                                /**
+                                 * How to retrive token:
+                                 *     SharedPreferences sharedPreferences = getSharedPreferences("OAUTH", MODE_PRIVATE);
+                                 *     String token = sharedPreferences.getString("ACCESS_TOKEN", "");
+                                 */
+                                Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+                                startActivity(intent);
+                            } else {
+                                // authorization failed, check ex for more details
+                            }
+                        });
+                break;
+            case 400:
+                if (resultCode == RESULT_OK) {
+                    handleSignInIntent(data);
+                }
+                break;
         }
+    }
+
+    private void handleSignInIntent(Intent data) {
+        GoogleSignIn.getSignedInAccountFromIntent(data)
+                .addOnSuccessListener(new OnSuccessListener<GoogleSignInAccount>() {
+                    @Override
+                    public void onSuccess(GoogleSignInAccount googleSignInAccount) {
+                        GoogleAccountCredential credential = GoogleAccountCredential
+                                .usingOAuth2(MainActivity.this, Collections.singleton(DriveScopes.DRIVE_FILE));
+                        credential.setSelectedAccount(googleSignInAccount.getAccount());
+
+                        Drive googleDriveService = new Drive.Builder(
+                                AndroidHttp.newCompatibleTransport(),
+                                new GsonFactory(),
+                                credential).
+                                setApplicationName("Object Detection")
+                                .build();
+
+                        Toast.makeText(MainActivity.this, "Verified Successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+                        MainActivity.this.startActivity(intent);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @org.jetbrains.annotations.NotNull Exception e) {
+                        Toast.makeText(MainActivity.this, "Verified Failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
 }
@@ -166,7 +224,7 @@ class VerifyTokenAsyncTask extends AsyncTask<String, Void, Boolean>
 
         if (aBoolean == Boolean.TRUE) {
             Toast.makeText(activity, "Verified Successfully", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(activity, DetectorActivity.class);
+            Intent intent = new Intent(activity, MenuActivity.class);
             activity.startActivity(intent);
         } else {
             Button btn = (Button) activity.findViewById(R.id.OAuthButton);
