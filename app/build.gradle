@@ -10,6 +10,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        renderscriptSupportModeEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [appAuthRedirectScheme: 'org.tensorflow.lite.examples.detection']
@@ -68,6 +69,7 @@ apply from:'download_model.gradle'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation project(path: ':sdk')
     implementation 'org.jetbrains:annotations:15.0'
     implementation 'org.jetbrains:annotations:15.0'
     interpreterImplementation project(":lib_interpreter")
