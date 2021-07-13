@@ -1,0 +1,7 @@
+[
+{
+  "directory": "D:/19CTT2/Android Studio Projects/MidtermProject/mobile-object-detection/sdk/.cxx/cmake/debug/x86",
+  "command": "E:\\ANDROI~2\\ndk\\210~1.611\\TOOLCH~1\\llvm\\prebuilt\\WINDOW~1\\bin\\CLANG_~1.EXE --target=i686-none-linux-android21 --gcc-toolchain=\"E:/Android SDK/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64\" --sysroot=\"E:/Android SDK/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64/sysroot\"    -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles\\opencv_jni_shared.dir\\dummy.cpp.o -c \"D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\libcxx_helper\\dummy.cpp\"",
+  "file": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\libcxx_helper\\dummy.cpp"
+}
+]

@@ -1,0 +1,43 @@
+{
+  "stringTable": {
+    "0": "D:/19CTT2/Android Studio Projects/MidtermProject/mobile-object-detection/sdk/.cxx/cmake/debug/armeabi-v7a",
+    "1": "--target=armv7-none-linux-androideabi21 --gcc-toolchain=E:/Android SDK/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=E:/Android SDK/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC"
+  },
+  "buildFiles": [
+    "E:\\Android SDK\\ndk\\21.0.6113669\\build\\cmake\\platforms.cmake",
+    "E:\\Android SDK\\ndk\\21.0.6113669\\build\\cmake\\android.toolchain.cmake",
+    "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\libcxx_helper\\CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "E:\\Android SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\armeabi-v7a\" clean"
+  ],
+  "buildTargetsCommand": "E:\\Android SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\armeabi-v7a\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "opencv_jni_shared-Debug-armeabi-v7a": {
+      "buildCommand": "E:\\Android SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\armeabi-v7a\" opencv_jni_shared",
+      "buildType": "debug",
+      "toolchain": "3606036338",
+      "abi": "armeabi-v7a",
+      "artifactName": "opencv_jni_shared",
+      "files": [
+        {
+          "src": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\libcxx_helper\\dummy.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\armeabi-v7a\\libopencv_jni_shared.a",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "3606036338": {
+      "cppCompilerExecutable": "E:\\ANDROI~2\\ndk\\210~1.611\\TOOLCH~1\\llvm\\prebuilt\\WINDOW~1\\bin\\CLANG_~1.EXE"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

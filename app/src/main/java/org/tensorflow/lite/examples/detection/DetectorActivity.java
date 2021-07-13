@@ -16,6 +16,7 @@
 
 package org.tensorflow.lite.examples.detection;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -169,8 +170,12 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 //                    String touched = tracker.checkTouched(x, y);
                     RectF cropBox = tracker.checkTouched(x, y);
                     Bitmap result = cropBitmap(croppedBitmap, cropBox);
-                    MediaStore.Images.Media.insertImage(getContentResolver(),
-                            result, "Test version", "");
+
+                    // Create an intent and pass it to Edge Detection
+                    Intent intent = new Intent(getApplicationContext(), EdgeDetectionActivity.class);
+                    intent.putExtra("image", result);
+                    startActivity(intent);
+
                     return true;
                 }
                 return false;
