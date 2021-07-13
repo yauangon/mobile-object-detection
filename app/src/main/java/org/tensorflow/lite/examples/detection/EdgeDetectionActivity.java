@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
@@ -39,6 +42,7 @@ public class EdgeDetectionActivity extends AppCompatActivity {
 
     private ImageView imageView;
     private Bitmap bitmap;
+    private Bitmap originalBitmap;
     private Button detectionButton;
 
     private final static int CANNY = 0;
@@ -83,8 +87,9 @@ public class EdgeDetectionActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bitmap img = (Bitmap) intent.getParcelableExtra("image");
         imageView.setImageBitmap(img);
-        bitmap = img;
-        resultBitmap = img;
+        originalBitmap = img.copy(img.getConfig(), true);
+        bitmap = img.copy(img.getConfig(), true);
+        resultBitmap = img.copy(img.getConfig(), true);
     }
 
     /*Start openCV*/
@@ -124,7 +129,7 @@ public class EdgeDetectionActivity extends AppCompatActivity {
                     resultBitmap = harris(tempImg);
                     imageView.setImageBitmap(resultBitmap);
                 } catch (Exception e) {
-                    Log.d("Edge", "Canny");
+                    Log.d("Edge", "Harris");
                 }
                 break;
             case R.id.hough:
@@ -133,7 +138,7 @@ public class EdgeDetectionActivity extends AppCompatActivity {
                     resultBitmap = houghLine(tempImg);
                     imageView.setImageBitmap(resultBitmap);
                 } catch (Exception e) {
-                    Log.d("Edge", "Canny");
+                    Log.d("Edge", "Hough");
                 }
                 break;
             case R.id.sobel:
@@ -142,7 +147,7 @@ public class EdgeDetectionActivity extends AppCompatActivity {
                     resultBitmap = sobel(tempImg);
                     imageView.setImageBitmap(resultBitmap);
                 } catch (Exception e) {
-                    Log.d("Edge", "Canny");
+                    Log.d("Edge", "Sobel");
                 }
                 break;
         }
@@ -249,4 +254,45 @@ public class EdgeDetectionActivity extends AppCompatActivity {
         Utils.matToBitmap(canny, resultHough);
         return resultHough;
     }
+
+    public void blendImage(View view) {
+        Bitmap blendResult = BlendImageOverlay(originalBitmap, resultBitmap);
+        // resultBitmap.eraseColor(Color.WHITE);
+        imageView.setImageBitmap(blendResult);
+        imageView.invalidate();
+    }
+
+    private Bitmap BlendImageOverlay(Bitmap bitmap1, Bitmap overlayBitmap) {
+        overlayBitmap = replaceColor(overlayBitmap, Color.BLACK, Color.TRANSPARENT);
+        overlayBitmap = replaceColor(overlayBitmap, Color.WHITE, Color.RED);
+        int bitmap1Width = bitmap1.getWidth();
+        int bitmap1Height = bitmap1.getHeight();
+        int bitmap2Width = overlayBitmap.getWidth();
+        int bitmap2Height = overlayBitmap.getHeight();
+
+        float marginLeft = (float) (bitmap1Width * 0.5 - bitmap2Width * 0.5);
+        float marginTop = (float) (bitmap1Height * 0.5 - bitmap2Height * 0.5);
+
+        Bitmap finalBitmap = Bitmap.createBitmap(bitmap1Width, bitmap1Height, bitmap1.getConfig());
+        Canvas canvas = new Canvas(finalBitmap);
+        canvas.drawBitmap(bitmap1, new Matrix(), null);
+        canvas.drawBitmap(overlayBitmap, marginLeft, marginTop, null);
+        return finalBitmap;
+    }
+
+    public static Bitmap replaceColor(Bitmap src, int colorToReplace, int replacingColor)
+    {
+        if (src == null)
+            return null;
+        int width = src.getWidth();
+        int height = src.getHeight();
+        int[] pixels = new int[width * height];
+        src.getPixels(pixels, 0, 1 * width, 0, 0, width, height);
+        for (int x = 0; x < pixels.length; ++x) {
+            //    pixels[x] = ~(pixels[x] << 8 & 0xFF000000) & Color.BLACK;
+            if(pixels[x] == colorToReplace) pixels[x] = replacingColor;
+        }
+        return Bitmap.createBitmap(pixels, width, height, Bitmap.Config.ARGB_8888);
+    }
+
 }

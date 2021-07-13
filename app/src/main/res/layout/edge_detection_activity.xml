@@ -51,6 +51,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_alignParentBottom="true">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Blend with original image"
+            android:id="@+id/blendButton"
+            android:onClick="blendImage"/>
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
