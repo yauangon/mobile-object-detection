@@ -16,6 +16,7 @@
 
 package org.tensorflow.lite.examples.detection;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -162,17 +163,22 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                 switch (masked){
                   case MotionEvent.ACTION_DOWN:
                   case MotionEvent.ACTION_POINTER_DOWN:
-                  case MotionEvent.ACTION_UP:
-                  case MotionEvent.ACTION_POINTER_UP:
                     float x = event.getX();
                     float y = event.getY();
 //                    String touched = tracker.checkTouched(x, y);
                     RectF cropBox = tracker.checkTouched(x, y);
+
                     if(cropBox == null) return false;
                     Bitmap result = cropBitmap(rgbFrameBitmap, cropBox);
-                    if(result != null)
-                      MediaStore.Images.Media.insertImage(getContentResolver(),
-                            result, "Test version", "");
+                    if(result != null) {
+                      // Create an intent and pass it to Edge Detection
+                      Intent intent = new Intent(getApplicationContext(), EdgeDetectionActivity.class);
+                      intent.putExtra("image", result);
+                      startActivity(intent);
+                    }
+                      //MediaStore.Images.Media.insertImage(getContentResolver(),
+                          //  result, "Test version", "");
+
                     return true;
                 }
                 return false;
