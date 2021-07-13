@@ -6,11 +6,8 @@ TODO LIST
 - [x] Nhận diện từ ảnh chụp + Crop ảnh
 - [ ] Chỉnh sửa ảnh
 
-##Credit 
 
-We used the codebase from [TensorFlow Demoapp](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android)
-
-### Overview
+## Overview
 This is an Androis App that allow you to perform object detection,
 choosing the object via touching it on the screen intuitively,
 and save to Google Drive via OAuth2 protocol. 
@@ -57,3 +54,8 @@ and save to Google Drive via OAuth2 protocol.
 _Please do not delete the assets folder content_. If you explicitly deleted the
 files, then please choose *Build*->*Rebuild* from menu to re-download the
 deleted model files into assets folder.
+
+## Credit 
+
+We used the codebase from [TensorFlow Demoapp](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android)
+
