@@ -6,8 +6,8 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="21"
-8-->/Users/cuongnguyenngoc/Desktop/Projects/mobile-object-detection/lib_interpreter/src/main/AndroidManifest.xml
+8-->D:\19CTT2\Android Studio Projects\MidtermProject\mobile-object-detection\lib_interpreter\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="28" />
-9-->/Users/cuongnguyenngoc/Desktop/Projects/mobile-object-detection/lib_interpreter/src/main/AndroidManifest.xml
+9-->D:\19CTT2\Android Studio Projects\MidtermProject\mobile-object-detection\lib_interpreter\src\main\AndroidManifest.xml
 10
 11</manifest>
