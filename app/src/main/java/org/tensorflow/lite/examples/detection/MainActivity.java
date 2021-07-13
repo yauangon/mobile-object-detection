@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -25,6 +26,7 @@ import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.services.drive.Drive;
@@ -76,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         GoogleSignInClient client = GoogleSignIn.getClient(this, signInOptions);
         startActivityForResult(client.getSignInIntent(), 400);
-
     }
     public void Authorize() {
 
@@ -159,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
                                 credential).
                                 setApplicationName("Object Detection")
                                 .build();
+//                        Log.d("ABCD", "ASDFAS");
 
                         Toast.makeText(MainActivity.this, "Verified Successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, MenuActivity.class);

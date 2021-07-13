@@ -1,9 +1,87 @@
 package org.tensorflow.lite.examples.detection;
 
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.os.Environment;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
+import com.google.api.client.http.FileContent;
+import com.google.api.client.json.gson.GsonFactory;
+import com.google.api.services.drive.Drive;
+import com.google.api.services.drive.DriveScopes;
+
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.sql.Timestamp;
+import java.util.Collections;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class DriveStorage {
-    public DriveStorage() {
+    private final Executor mExecutor = Executors.newSingleThreadExecutor();
+    private Drive mDriveService;
+    private Activity activity;
+    public DriveStorage(Activity activity, Drive mDriveService) {
+        this.activity = activity;
+        this.mDriveService = mDriveService;
+    }
 
+    public Task<String> createImage(Bitmap bmp) {
+        return Tasks.call(mExecutor, () -> {
+//            Toast.makeText(this.activity, "Uploading....", Toast.LENGTH_SHORT).show();
+
+            String path = getTempPathOfBitMap(bmp);
+            String filename = path.substring(path.lastIndexOf("/")+1);
+            com.google.api.services.drive.model.File fileMetaData = new com.google.api.services.drive.model.File();
+            fileMetaData.setName(filename);
+
+            File file = new File(path);
+            FileContent mediaContent = new FileContent("images/png", file);
+            com.google.api.services.drive.model.File myFile = null;
+//            Log.d("SADFASDF", "SDFSDF");
+
+            try {
+                myFile = mDriveService.files().create(fileMetaData, mediaContent).execute();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            if (myFile == null) {
+//                Toast.makeText(activity.getApplicationContext(), "Upload Failed", Toast.LENGTH_SHORT).show();
+                throw new IOException("Upload Failed");
+            }
+            return myFile.getId();
+        });
+    }
+
+    private String getTempPathOfBitMap(Bitmap bmp) {
+
+        long timestamp = new Timestamp(System.currentTimeMillis()).getTime();
+        String fileName = String.valueOf(timestamp);
+        File f3 = new File(activity.getExternalCacheDir(), "ImageData");
+
+        if(!f3.exists())
+            f3.mkdirs();
+        OutputStream outStream = null;
+        File file = new File(f3, fileName+".png");
+
+        try {
+            outStream = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.PNG, 85, outStream);
+            outStream.close();
+            Toast.makeText(activity.getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return file.getPath();
     }
 }
