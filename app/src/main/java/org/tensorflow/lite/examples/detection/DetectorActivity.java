@@ -205,6 +205,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     return null;
   }
 
+
   @Override
   protected void processImage() {
     ++timestamp;
