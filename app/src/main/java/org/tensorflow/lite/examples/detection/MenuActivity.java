@@ -1,11 +1,18 @@
 package org.tensorflow.lite.examples.detection;
 
+import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import java.io.ByteArrayOutputStream;
+import java.util.Random;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -19,7 +26,15 @@ public class MenuActivity extends AppCompatActivity {
         loadSavedImagesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, GoogleDriveHelper.class);
 
+                Bitmap bmp = createTestBitmap(100, 100, null);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+
+                intent.putExtra("image",byteArray);
+                startActivity(intent);
             }
         });
 
@@ -31,5 +46,20 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    public static Bitmap createTestBitmap(int w, int h,
+                                          @ColorInt Integer color) {
+        Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+
+        if (color == null) {
+            int colors[] = new int[] { Color.BLUE, Color.GREEN, Color.RED,
+                    Color.YELLOW, Color.WHITE };
+            Random rgen = new Random();
+            color = colors[rgen.nextInt(colors.length - 1)];
+        }
+
+        canvas.drawColor(color);
+        return bitmap;
     }
 }
