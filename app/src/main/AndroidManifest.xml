@@ -27,8 +27,9 @@
             android:name=".DetectorActivity"
             android:label="@string/tfe_od_app_name"
             android:screenOrientation="portrait">
-
         </activity>
+        <activity android:name=".EdgeDetectionActivity"/>
+
     </application>
 
 </manifest>
