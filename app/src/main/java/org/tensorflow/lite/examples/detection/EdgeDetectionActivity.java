@@ -111,23 +111,39 @@ public class EdgeDetectionActivity extends AppCompatActivity {
         switch (id) {
             case R.id.canny:
                 Toast.makeText(EdgeDetectionActivity.this, "Applied Canny edge detection", Toast.LENGTH_SHORT).show();
-                resultBitmap = canny(tempImg);
-                imageView.setImageBitmap(resultBitmap);
+                try{
+                    resultBitmap = canny(tempImg);
+                    imageView.setImageBitmap(resultBitmap);
+                } catch (Exception e) {
+                    Log.d("Edge", "Canny");
+                }
                 break;
             case R.id.harris:
                 Toast.makeText(EdgeDetectionActivity.this, "Applied Harris edge detection", Toast.LENGTH_SHORT).show();
-                resultBitmap = harris(tempImg);//Image processing for corner detection
-                imageView.setImageBitmap(resultBitmap);
+                try{
+                    resultBitmap = harris(tempImg);
+                    imageView.setImageBitmap(resultBitmap);
+                } catch (Exception e) {
+                    Log.d("Edge", "Canny");
+                }
                 break;
             case R.id.hough:
                 Toast.makeText(EdgeDetectionActivity.this, "Applied Hough line detection", Toast.LENGTH_SHORT).show();
-                resultBitmap = houghLine(tempImg);
-                imageView.setImageBitmap(resultBitmap);
+                try{
+                    resultBitmap = houghLine(tempImg);
+                    imageView.setImageBitmap(resultBitmap);
+                } catch (Exception e) {
+                    Log.d("Edge", "Canny");
+                }
                 break;
             case R.id.sobel:
                 Toast.makeText(EdgeDetectionActivity.this, "Applied Sobel gradient detection", Toast.LENGTH_SHORT).show();
-                resultBitmap = sobel(tempImg);
-                imageView.setImageBitmap(resultBitmap);
+                try{
+                    resultBitmap = sobel(tempImg);
+                    imageView.setImageBitmap(resultBitmap);
+                } catch (Exception e) {
+                    Log.d("Edge", "Canny");
+                }
                 break;
         }
     }

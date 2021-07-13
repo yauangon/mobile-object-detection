@@ -163,8 +163,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                 switch (masked){
                   case MotionEvent.ACTION_DOWN:
                   case MotionEvent.ACTION_POINTER_DOWN:
-                  case MotionEvent.ACTION_UP:
-                  case MotionEvent.ACTION_POINTER_UP:
                     float x = event.getX();
                     float y = event.getY();
 //                    String touched = tracker.checkTouched(x, y);

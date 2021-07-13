@@ -5,9 +5,9 @@
     "environmentVariables": []
   },
   "cmake": {
-    "cmakeArtifactsBaseFolder": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\x86",
-    "cmakeServerLogFile": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\x86\\cmake_server_log.txt",
-    "cmakeWrappingBaseFolder": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\.cxx\\cxx\\debug\\x86",
+    "cmakeArtifactsBaseFolder": "C:\\CodeSpace\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\x86",
+    "cmakeServerLogFile": "C:\\CodeSpace\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\x86\\cmake_server_log.txt",
+    "cmakeWrappingBaseFolder": "C:\\CodeSpace\\mobile-object-detection\\sdk\\.cxx\\cxx\\debug\\x86",
     "effectiveConfiguration": {
       "name": "traditional-android-studio-cmake-environment",
       "description": "Composite reified CMakeSettings configuration",
@@ -15,13 +15,13 @@
       "inheritEnvironments": [
         "ndk"
       ],
-      "buildRoot": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\x86",
-      "cmakeToolchain": "E:\\Android SDK\\ndk\\21.0.6113669\\build\\cmake\\android.toolchain.cmake",
-      "cmakeExecutable": "E:\\Android SDK\\cmake\\3.10.2.4988404\\bin\\cmake.exe",
+      "buildRoot": "C:\\CodeSpace\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\x86",
+      "cmakeToolchain": "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\build\\cmake\\android.toolchain.cmake",
+      "cmakeExecutable": "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\cmake.exe",
       "variables": [
         {
           "name": "CMAKE_FIND_ROOT_PATH",
-          "value": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\prefab\\x86\\prefab"
+          "value": "C:\\CodeSpace\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\prefab\\x86\\prefab"
         },
         {
           "name": "CMAKE_BUILD_TYPE",
@@ -29,7 +29,7 @@
         },
         {
           "name": "CMAKE_TOOLCHAIN_FILE",
-          "value": "E:\\Android SDK\\ndk\\21.0.6113669\\build\\cmake\\android.toolchain.cmake"
+          "value": "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\build\\cmake\\android.toolchain.cmake"
         },
         {
           "name": "ANDROID_ABI",
@@ -37,7 +37,7 @@
         },
         {
           "name": "ANDROID_NDK",
-          "value": "E:\\Android SDK\\ndk\\21.0.6113669"
+          "value": "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669"
         },
         {
           "name": "ANDROID_PLATFORM",
@@ -49,7 +49,7 @@
         },
         {
           "name": "CMAKE_ANDROID_NDK",
-          "value": "E:\\Android SDK\\ndk\\21.0.6113669"
+          "value": "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669"
         },
         {
           "name": "CMAKE_EXPORT_COMPILE_COMMANDS",
@@ -57,11 +57,11 @@
         },
         {
           "name": "CMAKE_LIBRARY_OUTPUT_DIRECTORY",
-          "value": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\build\\intermediates\\cmake\\debug\\obj\\x86"
+          "value": "C:\\CodeSpace\\mobile-object-detection\\sdk\\build\\intermediates\\cmake\\debug\\obj\\x86"
         },
         {
           "name": "CMAKE_MAKE_PROGRAM",
-          "value": "E:\\Android SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe"
+          "value": "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe"
         },
         {
           "name": "CMAKE_SYSTEM_NAME",
@@ -78,14 +78,14 @@
       ]
     }
   },
-  "cxxBuildFolder": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\x86",
+  "cxxBuildFolder": "C:\\CodeSpace\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\x86",
   "info": {
     "abi": "X86",
     "bitness": 32,
     "deprecated": false,
     "default": true
   },
-  "originalCxxBuildFolder": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\x86",
+  "originalCxxBuildFolder": "C:\\CodeSpace\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\x86",
   "variant": {
     "buildSystemArgumentList": [
       "-DANDROID_STL\u003dc++_shared"
@@ -100,24 +100,24 @@
     "module": {
       "buildSystem": "CMAKE",
       "cmake": {
-        "cmakeExe": "E:\\Android SDK\\cmake\\3.10.2.4988404\\bin\\cmake.exe",
+        "cmakeExe": "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\cmake.exe",
         "minimumCmakeVersion": "3.10.2",
-        "ninjaExe": "E:\\Android SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe"
+        "ninjaExe": "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe"
       },
-      "cmakeToolchainFile": "E:\\Android SDK\\ndk\\21.0.6113669\\build\\cmake\\android.toolchain.cmake",
-      "cxxFolder": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\.cxx",
+      "cmakeToolchainFile": "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\build\\cmake\\android.toolchain.cmake",
+      "cxxFolder": "C:\\CodeSpace\\mobile-object-detection\\sdk\\.cxx",
       "gradleModulePathName": ":sdk",
-      "intermediatesFolder": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\build\\intermediates",
-      "makeFile": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\libcxx_helper\\CMakeLists.txt",
-      "moduleBuildFile": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\build.gradle",
-      "moduleRootFolder": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk",
+      "intermediatesFolder": "C:\\CodeSpace\\mobile-object-detection\\sdk\\build\\intermediates",
+      "makeFile": "C:\\CodeSpace\\mobile-object-detection\\sdk\\libcxx_helper\\CMakeLists.txt",
+      "moduleBuildFile": "C:\\CodeSpace\\mobile-object-detection\\sdk\\build.gradle",
+      "moduleRootFolder": "C:\\CodeSpace\\mobile-object-detection\\sdk",
       "ndkDefaultAbiList": [
         "ARMEABI_V7A",
         "ARM64_V8A",
         "X86",
         "X86_64"
       ],
-      "ndkFolder": "E:\\Android SDK\\ndk\\21.0.6113669",
+      "ndkFolder": "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669",
       "ndkMetaAbiList": [
         {
           "abi": "ARMEABI_V7A",
@@ -174,38 +174,36 @@
       "ndkDefaultStl": "LIBCXX_STATIC",
       "ndkVersion": "21.0.6113669",
       "project": {
-        "compilerSettingsCacheFolder": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\.cxx",
-        "cxxFolder": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\.cxx",
+        "compilerSettingsCacheFolder": "C:\\CodeSpace\\mobile-object-detection\\.cxx",
+        "cxxFolder": "C:\\CodeSpace\\mobile-object-detection\\.cxx",
+        "ideBuildTargetAbi": "x86,armeabi-v7a,armeabi",
         "isBuildOnlyTargetAbiEnabled": true,
         "isCmakeBuildCohabitationEnabled": false,
         "isNativeCompilerSettingsCacheEnabled": false,
-        "rootBuildGradleFolder": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection",
-        "sdkFolder": "E:\\Android SDK",
+        "rootBuildGradleFolder": "C:\\CodeSpace\\mobile-object-detection",
+        "sdkFolder": "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk",
         "isPrefabEnabled": false
       },
       "splitsAbiFilterSet": [],
       "stlSharedObjectMap": {
         "LIBCXX_SHARED": {
-          "ARMEABI_V7A": "E:\\Android SDK\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\arm-linux-androideabi\\libc++_shared.so",
-          "ARM64_V8A": "E:\\Android SDK\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\aarch64-linux-android\\libc++_shared.so",
-          "X86": "E:\\Android SDK\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\i686-linux-android\\libc++_shared.so",
-          "X86_64": "E:\\Android SDK\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\x86_64-linux-android\\libc++_shared.so"
+          "ARMEABI_V7A": "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\arm-linux-androideabi\\libc++_shared.so",
+          "ARM64_V8A": "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\aarch64-linux-android\\libc++_shared.so",
+          "X86": "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\i686-linux-android\\libc++_shared.so",
+          "X86_64": "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\x86_64-linux-android\\libc++_shared.so"
         },
         "LIBCXX_STATIC": {},
         "NONE": {},
         "SYSTEM": {}
       }
     },
-    "objFolder": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\build\\intermediates\\cmake\\debug\\obj",
+    "objFolder": "C:\\CodeSpace\\mobile-object-detection\\sdk\\build\\intermediates\\cmake\\debug\\obj",
     "variantName": "debug",
     "validAbiList": [
-      "ARMEABI_V7A",
-      "ARM64_V8A",
-      "X86",
-      "X86_64"
+      "X86"
     ],
-    "prefabDirectory": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\prefab",
+    "prefabDirectory": "C:\\CodeSpace\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\prefab",
     "prefabPackageDirectoryList": []
   },
-  "prefabFolder": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\prefab\\x86"
+  "prefabFolder": "C:\\CodeSpace\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\prefab\\x86"
 }
