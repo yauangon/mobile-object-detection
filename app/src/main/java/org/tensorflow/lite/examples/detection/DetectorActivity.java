@@ -169,12 +169,17 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                     float y = event.getY();
 //                    String touched = tracker.checkTouched(x, y);
                     RectF cropBox = tracker.checkTouched(x, y);
-                    Bitmap result = cropBitmap(croppedBitmap, cropBox);
 
-                    // Create an intent and pass it to Edge Detection
-                    Intent intent = new Intent(getApplicationContext(), EdgeDetectionActivity.class);
-                    intent.putExtra("image", result);
-                    startActivity(intent);
+                    if(cropBox == null) return false;
+                    Bitmap result = cropBitmap(rgbFrameBitmap, cropBox);
+                    if(result != null) {
+                      // Create an intent and pass it to Edge Detection
+                      Intent intent = new Intent(getApplicationContext(), EdgeDetectionActivity.class);
+                      intent.putExtra("image", result);
+                      startActivity(intent);
+                    }
+                      //MediaStore.Images.Media.insertImage(getContentResolver(),
+                          //  result, "Test version", "");
 
                     return true;
                 }
@@ -187,21 +192,27 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     tracker.setFrameConfiguration(previewWidth, previewHeight, sensorOrientation);
   }
 
-  Bitmap cropBitmap(Bitmap bmp, RectF location)
-  {
-
-    Bitmap bmOverlay = Bitmap.createBitmap((int) location.width(), (int) location.height(),
-            Bitmap.Config.ARGB_8888);
-
-    Paint paint = new Paint();
-    paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-
-    Canvas canvas = new Canvas(bmOverlay);
-    canvas.drawBitmap(bmp, 0, 0, null);
-    canvas.drawRect(30, 30, 100, 100, paint);
-
-    return bmOverlay;
+  Bitmap cropBitmap(Bitmap bmp, RectF location) {
+    try {
+      float sx = (float) 900 / (float) 480;
+      float sy = (float) 1600 / (float) 640;
+      int x, y, width, height;
+      y = (int) (480 - location.right/sx - 10);
+      x = (int) (location.top/sy - 10);
+      if(x < 0) x = 0;
+      if(y < 0) y = 0;
+      width = (int) ((location.height()/sx) + 50)%480;
+      height = (int) ((location.width()/sy) + 50)%640;
+      Bitmap bmp2 = Bitmap.createBitmap(bmp, x, y, width, height);
+      Log.d("Render", "Successfully extract label");
+      return bmp2;
+    } catch (Exception e) {
+      Log.d("Render", location.width() + " " + location.height());
+      Log.d("Render", "Cannot extract label");
+    }
+    return null;
   }
+
 
   @Override
   protected void processImage() {
