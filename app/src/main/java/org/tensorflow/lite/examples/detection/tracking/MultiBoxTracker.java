@@ -182,7 +182,14 @@ public class MultiBoxTracker {
       final RectF detectionScreenRect = new RectF();
       rgbFrameToScreen.mapRect(detectionScreenRect, detectionFrameRect);
       if (detectionScreenRect.contains(x, y))
+      {
+        float sx = (float) 900 / (float) 480;
+        float sy = (float) 1600 / (float) 640;
+        String debug = detectionScreenRect.left/sx + " " + detectionScreenRect.right/sx +
+                " " + detectionScreenRect.top/sy + " " + detectionScreenRect.bottom/sy;
+        Log.d("Location: ", "Left, Right, Top, Bottom ScreenRect: " + debug);
         return detectionScreenRect;
+      }
     }
     return null;
   }
