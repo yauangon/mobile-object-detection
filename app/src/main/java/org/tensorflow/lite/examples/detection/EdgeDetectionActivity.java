@@ -164,6 +164,10 @@ public class EdgeDetectionActivity extends AppCompatActivity {
     public void savePicture(View view) {
         MediaStore.Images.Media.insertImage(getContentResolver(),
                 resultBitmap, Calendar.getInstance().getTime().toString(), "Taken by TF Object detection application");
+
+        Intent intent = new Intent(getApplicationContext(), GoogleDriveHelper.class);
+        intent.putExtra("image", resultBitmap);
+        startActivity(intent);
     }
 
     public Bitmap sobel(Mat src) {
