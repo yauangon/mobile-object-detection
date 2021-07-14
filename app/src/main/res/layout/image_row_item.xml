@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="50dp"
+    android:layout_marginHorizontal="30dp"
     android:gravity="center_vertical">
 
     <LinearLayout
@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@drawable/caret"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:scaleType="fitCenter"
             android:id="@+id/imageRowSrc"
             android:clickable="true"/>
@@ -24,6 +24,7 @@
             android:id="@+id/imageRowTextView"
             android:layout_marginHorizontal="10dp"
             android:layout_width="0dp"
+            android:textSize="10dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:text="Taken on 23h 05/06/2021 by user"
