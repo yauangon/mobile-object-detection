@@ -178,11 +178,13 @@ public class MultiBoxTracker {
     {
       TrackedRecognition tmp = trackedObjects.get(i);
       final RectF detectionFrameRect = new RectF(tmp.location);
-
       final RectF detectionScreenRect = new RectF();
       rgbFrameToScreen.mapRect(detectionScreenRect, detectionFrameRect);
       if (detectionScreenRect.contains(x, y))
+      {
         return detectionScreenRect;
+      }
+
     }
     return null;
   }

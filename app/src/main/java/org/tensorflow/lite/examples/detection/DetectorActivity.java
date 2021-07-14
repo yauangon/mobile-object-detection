@@ -32,6 +32,7 @@ import android.graphics.Typeface;
 import android.media.ImageReader.OnImageAvailableListener;
 import android.os.SystemClock;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
@@ -172,13 +173,17 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                     Bitmap result = cropBitmap(rgbFrameBitmap, cropBox);
                     if(result != null) {
                       // Create an intent and pass it to Edge Detection
-                      Intent intent = new Intent(getApplicationContext(), EdgeDetectionActivity.class);
-                      intent.putExtra("image", result);
-                      startActivity(intent);
+                      MediaStore.Images.Media.insertImage(getContentResolver(),
+                        result, "Test version", "");
+                      try {
+                        Intent intent = new Intent(getApplicationContext(), EdgeDetectionActivity.class);
+                        intent.putExtra("image", result);
+                        startActivity(intent);
+                      } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.d("Intent fail", "Edge intent, chack the gallery for result!");
+                      }
                     }
-                      //MediaStore.Images.Media.insertImage(getContentResolver(),
-                          //  result, "Test version", "");
-
                     return true;
                 }
                 return false;
@@ -192,15 +197,26 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
   Bitmap cropBitmap(Bitmap bmp, RectF location) {
     try {
-      float sx = (float) 900 / (float) 480;
-      float sy = (float) 1600 / (float) 640;
+
+      int SCREEN_WIDTH, SCREEN_HEIGHT;
+      SCREEN_WIDTH = this.getResources().getDisplayMetrics().widthPixels;
+      SCREEN_HEIGHT = this.getResources().getDisplayMetrics().heightPixels;
+      float sx = (float) SCREEN_WIDTH / (float) 480;
+      float sy = (float) SCREEN_HEIGHT/ (float) 640;
       int x, y, width, height;
-      y = (int) (480 - location.right/sx - 10);
-      x = (int) (location.top/sy - 10);
+      y = (int) (480 - location.right/sx - 5);
+      x = (int) (location.top/sy - 5);
       if(x < 0) x = 0;
       if(y < 0) y = 0;
-      width = (int) ((location.height()/sx) + 50)%480;
-      height = (int) ((location.width()/sy) + 50)%640;
+      width = (int) ((location.height()/sx) + 70);
+      height = (int) ((location.width()/sy) + 70);
+
+      if(width + x >= 480) width = 480 - x - 5;
+      if(height + y >= 640) height = 640 - y - 5;
+
+      Log.d("DRAW: ", "x, y, width, height" + x + " " + y + " " + width + " " + height);
+
+
       Bitmap bmp2 = Bitmap.createBitmap(bmp, x, y, width, height);
       Log.d("Render", "Successfully extract label");
       return bmp2;
