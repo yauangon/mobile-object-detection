@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                              *     SharedPreferences sharedPreferences = getSharedPreferences("OAUTH", MODE_PRIVATE);
                              *     String token = sharedPreferences.getString("ACCESS_TOKEN", "");
                              */
-                            Intent intent = new Intent(MainActivity.this, DetectorActivity.class);
+                            Intent intent = new Intent(MainActivity.this, MenuActivity.class);
                             startActivity(intent);
                         } else {
                             // authorization failed, check ex for more details

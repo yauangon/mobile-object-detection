@@ -1,3 +1,3 @@
-C:/CodeSpace/mobile-object-detection/sdk/.cxx/cmake/debug/x86/CMakeFiles/opencv_jni_shared.dir
-C:/CodeSpace/mobile-object-detection/sdk/.cxx/cmake/debug/x86/CMakeFiles/edit_cache.dir
-C:/CodeSpace/mobile-object-detection/sdk/.cxx/cmake/debug/x86/CMakeFiles/rebuild_cache.dir
+D:/19CTT2/Android Studio Projects/MidtermProject/mobile-object-detection/sdk/.cxx/cmake/debug/x86/CMakeFiles/opencv_jni_shared.dir
+D:/19CTT2/Android Studio Projects/MidtermProject/mobile-object-detection/sdk/.cxx/cmake/debug/x86/CMakeFiles/edit_cache.dir
+D:/19CTT2/Android Studio Projects/MidtermProject/mobile-object-detection/sdk/.cxx/cmake/debug/x86/CMakeFiles/rebuild_cache.dir

@@ -1,7 +1,8 @@
-Executable : C:\Users\Admin\AppData\Local\Android\Sdk\cmake\3.10.2.4988404\bin\ninja.exe
+Executable : E:\Android
 arguments : 
+SDK\cmake\3.10.2.4988404\bin\ninja.exe
 -C
-C:\CodeSpace\mobile-object-detection\sdk\.cxx\cmake\debug\x86
+D:\19CTT2\Android Studio Projects\MidtermProject\mobile-object-detection\sdk\.cxx\cmake\debug\x86
 opencv_jni_shared
 jvmArgs : 
 

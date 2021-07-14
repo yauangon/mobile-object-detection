@@ -8,4 +8,5 @@ public class Constants {
     public static String REDIRECT_URI = "org.tensorflow.lite.examples.detection:/oauth2callback";
     public static String DRIVE_SCOPE = "https://www.googleapis.com/auth/drive";
     public static String PROFILE_SCOPE = "profile";
+    public static String STORAGE_FILE = "DetectedImagesList";
 }

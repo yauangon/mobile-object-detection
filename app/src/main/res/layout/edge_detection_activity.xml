@@ -23,26 +23,32 @@
             android:layout_height="wrap_content"
             android:text="Sobel"
             android:layout_weight="1"
-            android:id="@+id/sobel"/>
+            android:id="@+id/sobel"
+            android:onClick="EdgeDetectionResult"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hough"
             android:layout_weight="1"
-            android:id="@+id/hough"/>
+            android:id="@+id/hough"
+            android:onClick="EdgeDetectionResult"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Harris"
             android:layout_weight="1"
-            android:id="@+id/harris"/>
+            android:id="@+id/harris"
+            android:onClick="EdgeDetectionResult"/>
 
     </LinearLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="150dp"
         android:id="@+id/imageView"
+
         android:src="@drawable/icn_chevron_up"
         android:scaleType="fitCenter"/>
 
@@ -51,6 +57,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_alignParentBottom="true">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Blend with original image"
+            android:id="@+id/blendButton"
+            android:onClick="blendImage"/>
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
