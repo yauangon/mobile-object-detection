@@ -39,6 +39,7 @@ public class EdgeDetectionActivity extends AppCompatActivity {
 
     private ImageView imageView;
     private Bitmap bitmap;
+    private Bitmap originalBitmap;
     private Button detectionButton;
 
     private final static int CANNY = 0;
@@ -81,10 +82,13 @@ public class EdgeDetectionActivity extends AppCompatActivity {
         imageView.invalidate();
 
         Intent intent = getIntent();
-        Bitmap img = (Bitmap) intent.getParcelableExtra("image");
+        // Bitmap img = (Bitmap) intent.getParcelableExtra("image");
+        byte[] bytes = intent.getByteArrayExtra("BMP");
+        Bitmap img = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         imageView.setImageBitmap(img);
-        bitmap = img;
-        resultBitmap = img;
+        originalBitmap = img.copy(img.getConfig(), true);
+        bitmap = img.copy(img.getConfig(), true);
+        resultBitmap = img.copy(img.getConfig(), true);
     }
 
     /*Start openCV*/
