@@ -29,11 +29,8 @@ public class MenuActivity extends AppCompatActivity {
                 Intent intent = new Intent(MenuActivity.this, GoogleDriveHelper.class);
 
                 Bitmap bmp = createTestBitmap(100, 100, null);
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
 
-                intent.putExtra("image",byteArray);
+                intent.putExtra("image", bmp);
                 startActivity(intent);
             }
         });

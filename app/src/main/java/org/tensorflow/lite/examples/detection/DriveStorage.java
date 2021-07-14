@@ -14,6 +14,7 @@ import com.google.api.client.http.FileContent;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
+import com.google.api.services.drive.model.FileList;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -35,12 +36,13 @@ public class DriveStorage {
 
     public Task<String> createImage(Bitmap bmp) {
         return Tasks.call(mExecutor, () -> {
-//            Toast.makeText(this.activity, "Uploading....", Toast.LENGTH_SHORT).show();
-
             String path = getTempPathOfBitMap(bmp);
             String filename = path.substring(path.lastIndexOf("/")+1);
+
+            String folderID = createFolderIfNotExists();
+
             com.google.api.services.drive.model.File fileMetaData = new com.google.api.services.drive.model.File();
-            fileMetaData.setName(filename);
+            fileMetaData.setName(filename).setParents(Collections.singletonList(folderID));
 
             File file = new File(path);
             FileContent mediaContent = new FileContent("images/png", file);
@@ -49,7 +51,6 @@ public class DriveStorage {
 
             try {
                 myFile = mDriveService.files().create(fileMetaData, mediaContent).execute();
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -78,10 +79,60 @@ public class DriveStorage {
             outStream = new FileOutputStream(file);
             bmp.compress(Bitmap.CompressFormat.PNG, 85, outStream);
             outStream.close();
-            Toast.makeText(activity.getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
+//            Toast.makeText(activity.getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return file.getPath();
+    }
+
+
+    private String createFolderIfNotExists() {
+        String folderId = "";
+
+        try {
+            folderId = getFolderId();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (folderId.equals("")) {
+            try {
+                folderId = createFolder();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return folderId;
+    }
+
+    private String getFolderId() throws IOException {
+        String pageToken = null;
+        do {
+            FileList result = mDriveService.files().list()
+                    .setQ("mimeType='application/vnd.google-apps.folder'")
+                    .setQ("name='ObjectDetected'")
+                    .setSpaces("drive")
+                    .setFields("nextPageToken, files(id, name)")
+                    .setPageToken(pageToken)
+                    .execute();
+            for (com.google.api.services.drive.model.File file : result.getFiles()) {
+                return file.getId();
+            }
+            pageToken = result.getNextPageToken();
+        } while (pageToken != null);
+        return "";
+    }
+
+    private String createFolder() throws IOException {
+        com.google.api.services.drive.model.File fileMetadata = new com.google.api.services.drive.model.File();
+        fileMetadata.setName("ObjectDetected");
+        fileMetadata.setMimeType("application/vnd.google-apps.folder");
+
+        com.google.api.services.drive.model.File file = mDriveService.files().create(fileMetadata)
+                .setFields("id")
+                .execute();
+        return file.getId();
     }
 }

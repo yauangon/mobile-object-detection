@@ -38,11 +38,6 @@ public class GoogleDriveHelper extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        byte[] byteArray = getIntent().getByteArrayExtra("image");
-//        if (byteArray == null) {
-//            Toast.makeText(GoogleDriveHelper.this, "Can not get image", Toast.LENGTH_SHORT).show();
-//        } else {
-//            bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         bmp = (Bitmap) getIntent().getParcelableExtra("image");
         if (bmp != null) {
             requestSignIn();
