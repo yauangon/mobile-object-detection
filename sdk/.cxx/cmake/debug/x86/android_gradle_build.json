@@ -1,39 +1,39 @@
 {
   "stringTable": {
-    "0": "D:/19CTT2/Android Studio Projects/MidtermProject/mobile-object-detection/sdk/.cxx/cmake/debug/x86",
-    "1": "--target=i686-none-linux-android21 --gcc-toolchain=E:/Android SDK/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=E:/Android SDK/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC"
+    "0": "C:/CodeSpace/mobile-object-detection/sdk/.cxx/cmake/debug/x86",
+    "1": "--target=i686-none-linux-android21 --gcc-toolchain=C:/Users/Admin/AppData/Local/Android/Sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/Admin/AppData/Local/Android/Sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC"
   },
   "buildFiles": [
-    "E:\\Android SDK\\ndk\\21.0.6113669\\build\\cmake\\platforms.cmake",
-    "E:\\Android SDK\\ndk\\21.0.6113669\\build\\cmake\\android.toolchain.cmake",
-    "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\libcxx_helper\\CMakeLists.txt"
+    "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\build\\cmake\\android.toolchain.cmake",
+    "C:\\CodeSpace\\mobile-object-detection\\sdk\\libcxx_helper\\CMakeLists.txt",
+    "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\build\\cmake\\platforms.cmake"
   ],
   "cleanCommands": [
-    "E:\\Android SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\x86\" clean"
+    "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"C:\\CodeSpace\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\x86\" clean"
   ],
-  "buildTargetsCommand": "E:\\Android SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\x86\" {LIST_OF_TARGETS_TO_BUILD}",
+  "buildTargetsCommand": "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"C:\\CodeSpace\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\x86\" {LIST_OF_TARGETS_TO_BUILD}",
   "libraries": {
     "opencv_jni_shared-Debug-x86": {
-      "buildCommand": "E:\\Android SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\x86\" opencv_jni_shared",
+      "buildCommand": "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"C:\\CodeSpace\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\x86\" opencv_jni_shared",
       "buildType": "debug",
-      "toolchain": "3606036338",
+      "toolchain": "1398570636",
       "abi": "x86",
       "artifactName": "opencv_jni_shared",
       "files": [
         {
-          "src": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\libcxx_helper\\dummy.cpp",
+          "src": "C:\\CodeSpace\\mobile-object-detection\\sdk\\libcxx_helper\\dummy.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         }
       ],
       "headers": [],
-      "output": "D:\\19CTT2\\Android Studio Projects\\MidtermProject\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\x86\\libopencv_jni_shared.a",
+      "output": "C:\\CodeSpace\\mobile-object-detection\\sdk\\.cxx\\cmake\\debug\\x86\\libopencv_jni_shared.a",
       "runtimeFiles": []
     }
   },
   "toolchains": {
-    "3606036338": {
-      "cppCompilerExecutable": "E:\\ANDROI~2\\ndk\\210~1.611\\TOOLCH~1\\llvm\\prebuilt\\WINDOW~1\\bin\\CLANG_~1.EXE"
+    "1398570636": {
+      "cppCompilerExecutable": "C:\\Users\\Admin\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
     }
   },
   "cFileExtensions": [],
