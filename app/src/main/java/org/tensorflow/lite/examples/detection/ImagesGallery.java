@@ -15,7 +15,8 @@ public class ImagesGallery {
         ArrayList<String> listOfAllImages = new ArrayList<>();
 
         File f3 = new File(context.getExternalFilesDir(null), "ImageData");
-
+        if (!f3.exists())
+            f3.mkdirs();
         File[] listOfFiles = f3.listFiles();
 
         for (int i = 0; i < listOfFiles.length; i++) {
