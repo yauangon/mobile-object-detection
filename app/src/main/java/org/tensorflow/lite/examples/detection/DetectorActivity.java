@@ -32,6 +32,7 @@ import android.graphics.Typeface;
 import android.media.ImageReader.OnImageAvailableListener;
 import android.os.SystemClock;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
@@ -89,11 +90,19 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   private MultiBoxTracker tracker;
 
   private BorderedText borderedText;
-
+  private int SCREEN_WIDTH;
+  private int SCREEN_HEIGHT;
 
 
   @Override
   public void onPreviewSizeChosen(final Size size, final int rotation) {
+    DisplayMetrics displayMetrics = new DisplayMetrics();
+    getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+    SCREEN_WIDTH = displayMetrics.heightPixels;
+    SCREEN_HEIGHT = displayMetrics.widthPixels;
+
+
+
     final float textSizePx =
         TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
@@ -192,8 +201,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
   Bitmap cropBitmap(Bitmap bmp, RectF location) {
     try {
-      float sx = (float) 900 / (float) 480;
-      float sy = (float) 1600 / (float) 640;
+      float sx = (float) SCREEN_WIDTH / (float) 480;
+      float sy = (float) SCREEN_HEIGHT / (float) 640;
       int x, y, width, height;
       y = (int) (480 - location.right/sx - 10);
       x = (int) (location.top/sy - 10);

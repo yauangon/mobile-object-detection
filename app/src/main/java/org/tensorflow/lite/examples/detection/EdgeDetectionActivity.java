@@ -10,6 +10,7 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -70,6 +71,9 @@ public class EdgeDetectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edge_detection_activity);
+
+
+
         imageView = findViewById(R.id.imageView);
         detectionButton = findViewById(R.id.detectionButton);
         detectionButton.setOnClickListener(new View.OnClickListener() {
