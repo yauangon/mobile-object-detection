@@ -6,6 +6,8 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -16,12 +18,15 @@ import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.FileList;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -134,5 +139,57 @@ public class DriveStorage {
                 .setFields("id")
                 .execute();
         return file.getId();
+    }
+
+    public Task<ArrayList<String>> getImagePathList() {
+        return Tasks.call(mExecutor, () -> {
+            ArrayList<String> imageIdList = getImageIdList();
+            ArrayList<String> imagePathList = new ArrayList<>();
+
+            File f3 = new File(activity.getExternalFilesDir(null), "ImageData");
+            if(!f3.exists())
+                f3.mkdirs();
+
+            assert imageIdList != null;
+            for (String id : imageIdList) {
+                File file = new File(f3, id+".png");
+
+                if (!file.exists()) {
+                    FileOutputStream fileOutputStream = new FileOutputStream(file);
+                    mDriveService.files().get(id)
+                            .executeMediaAndDownloadTo(fileOutputStream);
+                    fileOutputStream.close();
+                }
+
+                Log.d("Path: ", file.getPath());
+                imagePathList.add(file.getPath());
+            }
+            return imagePathList;
+        });
+    }
+
+    private ArrayList<String> getImageIdList() {
+        String pageToken = null;
+        ArrayList<String> imageIdList = new ArrayList<>();
+        String folderId = createFolderIfNotExists();
+
+        try {
+            do {
+                FileList result = mDriveService.files().list()
+                        .setQ("mimeType='image/png'")
+                        .setQ("'" + folderId + "' in parents")
+                        .setSpaces("drive")
+                        .setFields("nextPageToken, files(id, name)")
+                        .setPageToken(pageToken)
+                        .execute();
+                for (com.google.api.services.drive.model.File file : result.getFiles()) {
+                    imageIdList.add(file.getId());
+                }
+                pageToken = result.getNextPageToken();
+            } while (pageToken != null);
+        } catch (IOException e) {
+            return null;
+        }
+        return imageIdList;
     }
 }

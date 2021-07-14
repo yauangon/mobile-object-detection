@@ -26,11 +26,11 @@ public class MenuActivity extends AppCompatActivity {
         loadSavedImagesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, GoogleDriveHelper.class);
+                Intent intent = new Intent(MenuActivity.this, GalleryActivity.class);
 
-                Bitmap bmp = createTestBitmap(100, 100, null);
-
-                intent.putExtra("image", bmp);
+//                Bitmap bmp = createTestBitmap(100, 100, null);
+//
+//                intent.putExtra("image", bmp);
                 startActivity(intent);
             }
         });

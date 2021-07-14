@@ -18,10 +18,14 @@
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/tfe_od_app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.ObjectDetection">
-        <activity android:name=".GoogleDriveHelper"></activity>
+        <activity android:name=".ImageViewerActivity"></activity>
+        <activity android:name=".ImageViewer" />
+        <activity android:name=".GalleryActivity" />
+        <activity android:name=".GoogleDriveHelper" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -33,10 +37,8 @@
         <activity
             android:name=".DetectorActivity"
             android:label="@string/tfe_od_app_name"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".EdgeDetectionActivity"/>
-
+            android:screenOrientation="portrait" />
+        <activity android:name=".EdgeDetectionActivity" />
     </application>
 
 </manifest>
