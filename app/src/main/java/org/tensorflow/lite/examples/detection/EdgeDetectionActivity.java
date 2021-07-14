@@ -2,7 +2,9 @@ package org.tensorflow.lite.examples.detection;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -13,6 +15,7 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +23,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
@@ -32,9 +38,17 @@ import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Random;
 
 
@@ -44,6 +58,8 @@ public class EdgeDetectionActivity extends AppCompatActivity {
     private Bitmap bitmap;
     private Bitmap originalBitmap;
     private Button detectionButton;
+
+    private List<ImageCompressed> compresseds = new ArrayList<>();
 
     private final static int CANNY = 0;
     private final static int HARRIS = 1;
@@ -55,6 +71,8 @@ public class EdgeDetectionActivity extends AppCompatActivity {
     private Mat image = null;
     private Mat des = null;
     private Bitmap resultBitmap;
+
+    private File myExternalFile;
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -85,12 +103,62 @@ public class EdgeDetectionActivity extends AppCompatActivity {
         imageView.invalidate();
 
         Intent intent = getIntent();
-        Bitmap img = (Bitmap) intent.getParcelableExtra("image");
+        // Bitmap img = (Bitmap) intent.getParcelableExtra("image");
+        byte[] bytes = intent.getByteArrayExtra("BMP");
+        Bitmap img = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         imageView.setImageBitmap(img);
         originalBitmap = img.copy(img.getConfig(), true);
         bitmap = img.copy(img.getConfig(), true);
         resultBitmap = img.copy(img.getConfig(), true);
+
+        DetectedImage newImage = new DetectedImage(Calendar.getInstance().getTime(), img);
+        // detectedImages.add(newImage);
+
+        // Get remaining image from prefs
+        try {
+            SharedPreferences mPrefs = getSharedPreferences(getApplicationInfo().name, Context.MODE_PRIVATE);
+            String json = mPrefs.getString(Constants.STORAGE_FILE, "");
+            if (json != null) {
+                Gson gson = new Gson();
+                Type type = new TypeToken<List<ImageCompressed>>(){}.getType();
+                compresseds.addAll(gson.fromJson(json, type));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        ImageCompressed newCompress = new ImageCompressed();
+        newCompress.date = newImage.getCreationDate();
+        Log.d(TAG, "onCreate: " + newCompress.date.toString());
+        newCompress.bitmap = encodeTobase64(newImage.getImage()) ;
+        compresseds.add(newCompress);
+
+        try {
+            // Save list of images to prefs
+            SharedPreferences mPrefs = getSharedPreferences(getApplicationInfo().name, Context.MODE_PRIVATE);
+            SharedPreferences.Editor ed = mPrefs.edit();
+            ed.clear();
+            Gson gson = new Gson();
+            ed.putString(Constants.STORAGE_FILE, gson.toJson(compresseds));
+            ed.clear().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
+
+    public static String encodeTobase64(Bitmap image) {
+        Bitmap immage = image;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        immage.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
+
+        // Log.d("Image Log:", imageEncoded);
+        return imageEncoded;
+    }
+
+
 
     /*Start openCV*/
     @Override

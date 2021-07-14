@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="50dp"
+    android:gravity="center_vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/imageItemRow"
+        android:layout_marginVertical="15dp">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/caret"
+            android:layout_weight="3"
+            android:scaleType="fitCenter"
+            android:id="@+id/imageRowSrc"
+            android:clickable="true"/>
+        <TextView
+            android:id="@+id/imageRowTextView"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Taken on 23h 05/06/2021 by user"
+            android:fontFamily="monospace"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+</FrameLayout>

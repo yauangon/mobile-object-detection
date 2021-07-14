@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_red_light">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_recording_black_24dp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Realtime Detection"
+            android:layout_marginHorizontal="30dp"
+            android:id="@+id/rdButton"
+            android:onClick="HomeFragment"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_gallery_black_24dp"
+            android:layout_marginTop="50dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select from gallery"
+            android:layout_marginHorizontal="30dp"
+            android:id="@+id/sgButton"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_cloud_black_24dp"
+            android:layout_marginTop="50dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Load images from Google Drive"
+            android:layout_marginHorizontal="30dp"
+            android:id="@+id/driveButton"/>
+    </LinearLayout>
+
+</ScrollView>

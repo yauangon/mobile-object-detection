@@ -38,6 +38,8 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -173,7 +175,11 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                     if(result != null) {
                       // Create an intent and pass it to Edge Detection
                       Intent intent = new Intent(getApplicationContext(), EdgeDetectionActivity.class);
-                      intent.putExtra("image", result);
+                      ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                      result.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                      byte[] bytes = stream.toByteArray();
+                      intent.putExtra("BMP",bytes);
+                      // intent.putExtra("image", result);
                       startActivity(intent);
                     }
                       //MediaStore.Images.Media.insertImage(getContentResolver(),
