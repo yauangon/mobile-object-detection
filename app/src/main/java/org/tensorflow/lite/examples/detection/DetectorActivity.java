@@ -96,14 +96,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
   @Override
   public void onPreviewSizeChosen(final Size size, final int rotation) {
-    DisplayMetrics displayMetrics = new DisplayMetrics();
-    getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-    SCREEN_WIDTH = displayMetrics.heightPixels;
-    SCREEN_HEIGHT = displayMetrics.widthPixels;
-
-
-
-    final float textSizePx =
+        final float textSizePx =
         TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
     borderedText = new BorderedText(textSizePx);
@@ -200,6 +193,11 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   }
 
   Bitmap cropBitmap(Bitmap bmp, RectF location) {
+    DisplayMetrics displayMetrics = new DisplayMetrics();
+    getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+    SCREEN_WIDTH = displayMetrics.heightPixels;
+    SCREEN_HEIGHT = displayMetrics.widthPixels;
+
     try {
       float sx = (float) SCREEN_WIDTH / (float) 480;
       float sy = (float) SCREEN_HEIGHT / (float) 640;
