@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     tools:context=".MainActivity"
-    android:orientation="vertical">
-
-    <Button
-        android:id="@+id/OAuthButton"
+>
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Log in with Google"
-        android:layout_gravity="center_vertical|center_horizontal"
+        android:orientation="vertical"
         android:layout_centerInParent="true"
+        android:layout_centerVertical="true">
+        <Button
+            android:id="@+id/OAuthButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Log in with Google"
+ />
+        <Button
+            android:id="@+id/OfflineModeButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="offline"
+/>
+    </LinearLayout>
 
-        />
-    <Button
-        android:id="@+id/OfflineModeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="offline"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:layout_centerInParent="true"
-
-        />
-</LinearLayout>
+</RelativeLayout>

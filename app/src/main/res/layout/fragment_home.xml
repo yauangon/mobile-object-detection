@@ -40,7 +40,8 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Load images from Google Drive"
+            android:backgroundTint="@color/cardview_dark_background"
+            android:text="Load images from Google Drive (Upcoming)"
             android:layout_marginHorizontal="30dp"
             android:id="@+id/driveButton"/>
     </LinearLayout>
