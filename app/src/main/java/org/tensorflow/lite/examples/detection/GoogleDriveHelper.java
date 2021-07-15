@@ -38,9 +38,13 @@ public class GoogleDriveHelper extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        bmp = (Bitmap) getIntent().getParcelableExtra("image");
+        byte[] bytes = getIntent().getByteArrayExtra("BMP");
+//        Log.d("ngoccuongpvc", String.valueOf(bytes.length));
+
+        bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         if (bmp != null) {
             requestSignIn();
+        } else {
         }
 //        }
 

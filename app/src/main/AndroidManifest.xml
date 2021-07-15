@@ -25,7 +25,6 @@
         android:hardwareAccelerated="true"
         android:theme="@style/AppTheme.ObjectDetection">
         <activity android:name=".ImageViewerActivity"></activity>
-        <activity android:name=".ImageViewer" />
         <activity android:name=".GalleryActivity" />
         <activity android:name=".GoogleDriveHelper" />
         <activity android:name=".MenuActivity" />

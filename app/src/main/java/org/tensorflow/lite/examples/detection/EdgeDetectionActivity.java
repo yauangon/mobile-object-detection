@@ -236,8 +236,16 @@ public class EdgeDetectionActivity extends AppCompatActivity {
     }
 
     public void savePicture(View view) {
-        MediaStore.Images.Media.insertImage(getContentResolver(),
-                resultBitmap, Calendar.getInstance().getTime().toString(), "Taken by TF Object detection application");
+//        MediaStore.Images.Media.insertImage(getContentResolver(),
+//                resultBitmap, Calendar.getInstance().getTime().toString(), "Taken by TF Object detection application");
+
+        Intent intent = new Intent(getApplicationContext(), GoogleDriveHelper.class);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        resultBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] bytes = stream.toByteArray();
+//        Log.d("ngoccuongpvc", String.valueOf(bytes.length));
+        intent.putExtra("BMP", bytes);
+        startActivity(intent);
     }
 
     public Bitmap sobel(Mat src) {

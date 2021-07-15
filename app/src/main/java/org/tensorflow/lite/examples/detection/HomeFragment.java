@@ -34,6 +34,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private Button realtimeDetectionButton;
     private Button selectFromGalleryButton;
+    private Button loadImagesFromGoogleDriveButton;
     private View view;
 
     @Override
@@ -45,8 +46,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         realtimeDetectionButton = view.findViewById(R.id.rdButton);
         selectFromGalleryButton = view.findViewById(R.id.sgButton);
+        loadImagesFromGoogleDriveButton = view.findViewById(R.id.driveButton);
         realtimeDetectionButton.setOnClickListener(this);
         selectFromGalleryButton.setOnClickListener(this);
+        loadImagesFromGoogleDriveButton.setOnClickListener(this);
         return view;
     }
 
@@ -61,6 +64,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             startActivity(intent);
         } else if (v.getId() == R.id.driveButton) {
             // CUONG'S PART
+            Intent intent = new Intent(getActivity().getApplicationContext(), GalleryActivity.class);
+            startActivity(intent);
         }
     }
 
