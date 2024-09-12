@@ -6,6 +6,10 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -14,22 +18,27 @@
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/tfe_od_app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.ObjectDetection">
+        <activity android:name=".ImageViewerActivity"></activity>
+        <activity android:name=".ImageViewer" />
+        <activity android:name=".GalleryActivity" />
+        <activity android:name=".GoogleDriveHelper" />
+        <activity android:name=".MenuActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".DetectorActivity"
             android:label="@string/tfe_od_app_name"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".EdgeDetectionActivity"/>
-
+            android:screenOrientation="portrait" />
+        <activity android:name=".EdgeDetectionActivity" />
     </application>
 
 </manifest>
